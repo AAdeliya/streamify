@@ -1,9 +1,14 @@
 import { ValidationPipe } from '@nestjs/common'
+import { ExpressAdapter } from '@nestjs/platform-express';
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import RedisStore from 'connect-redis'
 import * as cookieParser from 'cookie-parser'
 import * as session from 'express-session'
+import * as express from 'express';
+
+
+
 import * as graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.js'
 
 // Core NestJS module
@@ -20,6 +25,9 @@ import { parseBoolean } from './shared/utils/parse-boolean.util'
 
 async function bootstrap() {
   // Create the NestJS app instance
+  // const server = express();
+
+  // const app = await NestFactory.create(CoreModule, new ExpressAdapter(server));
   const app = await NestFactory.create(CoreModule, { rawBody: true })
 
   // Access .env values via ConfigService
