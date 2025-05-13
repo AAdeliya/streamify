@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { UserModel } from './models/user.model';
 import { PrismaService } from 'src/prisma/prisma.service'
 import { CreateUserInput } from './inputs/create-user.input';
+import {} from 'argon2';
 
 
 @Injectable()
@@ -36,7 +37,7 @@ export class AccountService {
         }
       
         // Hash password (using bcrypt for example)
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword =; //hash + prisma 
       
         // Create new user entity
         const user = this.userRepository.create({
