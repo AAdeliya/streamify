@@ -2,12 +2,14 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { UserModel } from './models/user.model';
 import { PrismaService } from 'src/prisma/prisma.service'
 import { CreateUserInput } from './inputs/create-user.input';
-import {} from 'argon2';
+import {hash, verify} from 'argon2';
+
 
 
 @Injectable()
 export class AccountService {
   userRepository: any;
+  prismaService: any;
     constructor(private readonly prisma: PrismaService) {}
 
     async findAll(): Promise<UserModel[]> {
@@ -28,7 +30,7 @@ export class AccountService {
         const { username, email, password } = input;
       
         // Check for existing user by username or email
-        const existingUser = await this.userRepository.findOne({
+        const existingUser = await this.prismaService.user.findOne({
           where: [{ username }, { email }],
         });
       
@@ -36,24 +38,23 @@ export class AccountService {
           throw new ConflictException('Username or email already exists');
         }
       
-        // Hash password (using bcrypt for example)
-        const hashedPassword =; //hash + prisma 
-      
         // Create new user entity
-        const user = this.userRepository.create({
+        const user = this.prismaService.user.create({
+          data: {
           username,
           email,
-          password: hashedPassword,
-          displayName: username, // default display name from username
-        });
+          password: await hash(password),
+          displayName: username, 
+          stream : {
+            crete: {
+              titles : `Стрим ${username}`
+            }
+      }}});
       
-        await this.userRepository.save(user);
+        await this.prismaService.user.save(user);
       
         return true;
       }
-      
-
-
 }
 
 
