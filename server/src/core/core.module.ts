@@ -9,6 +9,7 @@ import { RedisModule } from './redis/redis.module';
 import { HttpAdapterHost } from '@nestjs/core';
 import { AccountModule } from 'src/modules/auth/account/account.module'; // ✅ Import AccountModule
 
+
 @Module({
   imports: [
     ConfigModule.forRoot({
