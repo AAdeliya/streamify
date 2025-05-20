@@ -3,7 +3,9 @@ import { ConfigService } from '@nestjs/config';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginInput } from '../inputs/login.input';
 import * as argon2 from 'argon2';
-import { saveSession, destroySession } from 'src/shared/utils/session.utils';
+import { saveSession, destroySession } from 'src/shared/utils/session.util';
+//import { saveSession, destroySession } from '../../../../shared/utils/session.utils';
+
 import { Request } from 'express';
 
 @Injectable()

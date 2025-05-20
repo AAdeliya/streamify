@@ -13,8 +13,8 @@ export class SessionResolver {
     @Args('input') loginInput: LoginInput,
     @Context() context: GqlContext,
   ) {
-    const { user } = await this.sessionService.login(context.req, loginInput);
-    return user;
+  
+    return this.sessionService.login(context.req, loginInput);
   }
 
   @Mutation(() => Boolean)
