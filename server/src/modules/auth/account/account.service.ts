@@ -55,6 +55,17 @@ export class AccountService {
       
         return true;
       }
+
+      // Add this method to retrieve current user
+public async me(id: string) {
+	const user = await this.prismaService.user.findUnique({
+		where: {
+			id,
+		},
+	})
+	return user
+}
+
 }
 
 
