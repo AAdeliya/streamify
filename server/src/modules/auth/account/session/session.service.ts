@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginInput } from '../inputs/login.input';
 import * as argon2 from 'argon2';
 import { saveSession, destroySession } from 'src/shared/utils/session.util';
-//import { saveSession, destroySession } from '../../../../shared/utils/session.utils';
+
 
 import { Request } from 'express';
 
@@ -42,6 +42,32 @@ export class SessionService {
     // If valid → call saveSession(req, user)
     return saveSession(req, user);
   }
+
+  public async findByUser(req: Request) {
+	const userId = req.session.userId
+	if (!userId) throw new NotFoundException('User not found')
+
+	const keys = await this.redisService.keys('*')
+
+	const userSessions = []
+
+	for (const key of keys) {
+		const sessionData = await this.redisService.get(key)
+		if (sessionData) {
+			const session = JSON.parse(sessionData)
+			if (session.userId === userId) {
+				userSessions.push({
+					...session,
+					id: key.split(':')[1]
+				})
+			}
+		}
+	}
+
+	userSessions.sort((a, b) => b.createdAt - a.createdAt)
+
+	return userSessions.filter(session => session.id !== req.session.id)
+}
 
   async logout(req: Request) {
     // Call destroySession(req, configService)
