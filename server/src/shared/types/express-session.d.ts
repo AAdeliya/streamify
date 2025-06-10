@@ -1,5 +1,4 @@
 import 'express-session'
-import 'express-session'
 import type { SessionMetadata } from './session-metadata.types'
 
 declare module 'express-session' {
@@ -10,9 +9,3 @@ declare module 'express-session' {
 	}
 }
 
-declare module 'express-session' {
-	interface SessionData {
-		userId?: string
-		createdAt?: Date | string
-	}
-}
