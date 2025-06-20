@@ -54,7 +54,5 @@ export class SessionResolver {
 
   }
 
-  
-
 }
 
