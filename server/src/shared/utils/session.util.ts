@@ -2,11 +2,13 @@ import { InternalServerErrorException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import type { Request } from 'express';
 import type { User } from 'prisma/generated';
+import { SessionMetadata } from '../types/session-metadata.types';
 
 // Extend the Express Request type to include session property
 declare module 'express' {
   interface Request {
     session: {
+      id: any;
       createdAt: Date;
       userId: string;
       save: (callback: (err: any) => void) => void;
@@ -19,8 +21,7 @@ declare module 'express' {
 }
 
 export function saveSession(
-  req: Request,
-  user: User,
+req: Request, user: User, metadata: SessionMetadata,
 ) {
   return new Promise((resolve, reject) => {
     if (!req.session) {
