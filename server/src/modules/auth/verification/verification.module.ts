@@ -8,4 +8,6 @@ import { MailModule } from 'src/modules/mail/mail.module';
   providers: [VerificationService, VerificationResolver],
   exports: [VerificationService],
 })
+
+
 export class VerificationModule {}
