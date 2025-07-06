@@ -1,9 +1,9 @@
 import { Resolver, Mutation, Args, Context } from '@nestjs/graphql';
 import { VerificationService } from './verification.service';
 import { VerificationInput } from './inputs/verification.input';
-import { AuthModel } from '@/src/modules/auth/models/auth.model';
-import { GqlContext } from '@/src/shared/types/gql-context.type';
-import { UserAgent } from '@/src/shared/decorators/user-agent.decorator';
+import { AuthModel } from 'src/modules/auth/models/auth.model';
+import { GqlContext } from 'src/shared/types/gql-context.type';
+import { UserAgent } from 'src/shared/decorators/user-agent.decorator';
 
 @Resolver('Verification')
 export class VerificationResolver {
