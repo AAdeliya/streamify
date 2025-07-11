@@ -5,7 +5,7 @@ import { render } from '@react-email/components';
 import { SessionMetadata } from '../../shared/types/session-metadata.types';
 import { VerificationTemplate } from './templates/verification.template';
 import { PasswordRecoveryTemplate } from './templates/password-recovery.template';
-// ... other template imports
+
 
 @Injectable()
 export class MailService {
