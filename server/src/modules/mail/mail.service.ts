@@ -38,6 +38,7 @@ export class MailService {
       this.logger.error(`Failed to send password reset email to ${email}`, error);
       throw new Error('Failed to send password reset email');
     }
+    
   }
 
   private async sendMail(email: string, subject: string, html: string): Promise<void> {
